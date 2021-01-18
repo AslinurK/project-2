@@ -1,0 +1,29 @@
+{
+  "name": "project-2",
+  "version": "1.0.0",
+  "description": "Project 2",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^1.7.0",
+    "sequelize": "^4.44.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AslinurK/project-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AslinurK/project-2/issues"
+  },
+  "homepage": "https://github.com/AslinurK/project-2#readme"
+}
