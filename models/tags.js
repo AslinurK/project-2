@@ -21,11 +21,6 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true
   });
   
-  // Tag.associate = function(models) {
-  //   Tag.belongsTo(models.Authors, {
-  //     foreignKey: "AuthorID"
-  //   });
-  // };
   
   Tag.associate = function(models) {
     Tag.belongsTo(models.Post, {

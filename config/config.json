@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "Batuluca.123",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql"

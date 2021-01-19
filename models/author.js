@@ -32,14 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
   };
-
-  // Authors.associate = function(models) {
-  //   Authors.hasMany(models.Tag, {
-  //     foreignKey: {
-  //       allowNull: true
-  //     }
-  //   });
-  // };
-
+  
   return Authors;
 };
