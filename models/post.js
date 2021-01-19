@@ -1,64 +1,54 @@
 module.exports = function(sequelize, DataTypes) {
-  const Post = sequelize.define("Post",
-    {
-      ID: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-        validation: {
-          isAlphanumeric: true,
-          len: [40]
-        }
+  const Posts = sequelize.define('Posts', {
+    ID : {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      validation: {
+        isAlphanumeric: true,
+        len: [40]
       },
-      Location: {
-        type: DataTypes.STRING(5),
-        validation: {
-          len: [5]
-        }
-      },
-      Body: {
-        type: DataTypes.STRING(313),
-        validation: {
-          len: [313],
-          notEmpty: true,
-          notNull: true
-        }
-      },
-      Image: {
-        type: DataTypes.STRING,
-        validation: {
-          isUrl: true
-        }
-      },
-      Public: {
-        type: DataTypes.BOOLEAN
-      },
-      Rating: {
-        type: DataTypes.INTEGER
-      },
-      UserName: {
-        type: DataTypes.STRING,
-        notEmpty: true
+    },
+    Location: {
+      type: DataTypes.STRING(5),
+      validation: {
+        len: [5]
       }
     },
-    {
-      paranoid: true
+    Body: {
+      type: DataTypes.STRING(313),
+      validation: {
+        len: [313],
+        notEmpty: true,
+        notNull: true
+      }
+    },
+    Image: {
+      type: DataTypes.STRING,
+      validation: {
+        isUrl: true
+      }
+    },
+    Tags: {
+      type: DataTypes.JSON,
+    },
+    Public: {
+      type: DataTypes.BOOLEAN,
+    },
+    Rating: {
+      type: DataTypes.INTEGER
     }
-  );
-
-  Post.associate = function(models) {
-    Post.hasMany(models.Tag, {
-      foreignKey: "PostID",
-      onDelete: "cascade"
+  },{
+      paranoid: true
     });
 
-    Post.belongsTo(models.Authors, {
-      foreignKey: // "AuthorID"
-      {
+  Posts.associate = function(models) {
+    Posts.belongsTo(models.Authors, {
+      foreignKey: {
         allowNull: true
       }
     });
   };
-
-  return Post;
+  
+  return Posts;
 };

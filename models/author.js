@@ -28,10 +28,10 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Authors.associate = function(models) {
-    Authors.hasMany(models.Post, {
+    Authors.hasMany(models.Posts, {
       onDelete: "cascade"
     });
   };
-  
+
   return Authors;
 };
