@@ -19,16 +19,18 @@ This app features user accounts and filtering posts by Neighbor Notifications, C
 -Marketplace: Residents and staff have exclusive discounts to local businesses at their fingertips, inviting them to explore and support their community.
 
 
-## Run
+## Installation
 
-To run the app locally, node must be installed in your terminal. Run the following to initialize:
+-Run " npm i " to install the necessary dependencies
 
-$ npm init
-$ npm instal
+-For the database, look in the db directory for models/schema.sql. Use this schema to create a database.
 
-Run the following in the main directory to start app onl localhost port 3000
+-Input personal MySql password in the config.json file
 
-$ node server
+-Run node server.js
 
+-Visit localhost:3000
+
+## Deployment
 
 
