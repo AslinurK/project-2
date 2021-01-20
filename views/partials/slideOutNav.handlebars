@@ -1,0 +1,38 @@
+<ul id="slide-out" class="sidenav">
+    <div id="side-login">
+        <h5>Login:</h5>
+        <hr>
+        <div class="input-field col s5">
+            <input id="email-slide" type="email" class="validate">
+            <label for="email-slide">Email</label>
+        </div>
+        <div class="input-field col s5">
+            <input id="password-slide" type="password" class="validate">
+            <label for="password-slide">Password</label>
+        </div>
+    </div>
+    <div id="side-logged-in">
+        <div class="logged-in-icon"></div>
+        <span class="logged-in-name">Sample Name Here</span>
+    </div>
+    <h5>Filter Posts</h5>
+    <hr>
+    <form>
+        <h6>Location:</h6>
+        <input class="side-nav-location-mobile" type="text" placeholder="Zip Code">
+        <h6>Search Topics:</h6>
+        <select class="topic-filter-mobile">
+            <option value="" disabled selected>Topics</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+        </select>
+
+        <h6>Search Usernames:</h6>
+        <div class="search-div">
+            <input class="search-text-mobile" type="text" placeholder="Filter User Names">
+            <ul class="userNameList-mobile"></ul>
+        </div>
+    </form>
+    <button class="btn waves-effect waves-light filter-search-mobile" id="side-search" <!-- name="action" -->>Search</button>
+</ul>
