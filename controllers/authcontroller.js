@@ -6,7 +6,7 @@ exports.signup = function (req, res) {
     htmlQueries.findAllPosts()
     .then(function (dbPosts) {
         // console.log("POSTS \n" + JSON.stringify(dbPosts, null, 2))
-            res.render("postapp", {
+            res.render("blueit", {
             posts: dbPosts,
             findPosts: true,
             signMeUp: true
@@ -19,7 +19,7 @@ exports.signin = (req, res) => {
     htmlQueries.findAllPosts()
     .then(function (dbPosts) {
         // console.log("POSTS \n" + JSON.stringify(dbPosts, null, 2))
-        res.render("postapp", {
+        res.render("blueit", {
             posts: dbPosts,
             findPosts: true,
             signMeIn: true,

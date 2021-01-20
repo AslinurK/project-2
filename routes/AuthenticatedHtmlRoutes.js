@@ -4,7 +4,7 @@ const db = require("../models");
 
 module.exports = function(app) {
 
-    //  home page (logged in)
+    // blueit home page (logged in)
     app.get("/blueit", isAuthenticated, (req, res) => {
         htmlQueries.findAllPosts()
         .then(function(dbPosts) {

@@ -14,8 +14,6 @@ module.exports = function(app) {
       UserName: req.body.UserName
     };
 
-    // console.log("new post =======================")
-    // console.log(newPost)
     
     db.Post.create(newPost).then(postInfo => {
       const tags = req.body.Tags.split(',');
@@ -67,9 +65,7 @@ module.exports = function(app) {
       include: [db.Authors]
     }).then(dbPosts => {
       res.json(dbPosts);
-      // res.render("posts", {
-      //   posts: dbPosts
-      // });
+
     });
   });
 

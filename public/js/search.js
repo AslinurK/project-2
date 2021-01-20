@@ -1,84 +1,93 @@
 $(document).ready(() => {
 
+    // SIDENAV FEATURES
+    $("select").formSelect();
+    $(".sidenav").sidenav();
+    $("input#input_text, textarea#textarea2").characterCounter();
+
+    const checkLocationInput = function() {
+        let locationFilter = $("#side-nav-location").val();
+        if (locationFilter.length > 0) {
+            $(location).attr('href',"/posts/" + locationFilter);
+        } else {
+            console.log("no location entered")
+        }
+    };
+
+    // Perform search on entered filters
+    const performSearch = (mobile) => {
+        const $location = $(`.side-nav-location${mobile}`).val().trim();
+        const $tag = $(`.topic-filter${mobile} :selected`).text();
+        const $select = $(`.topic-filter${mobile}`).children("option:selected").attr("value");
+        const $rating = $(`rating-filter${mobile} :selected`).text();
+        let URL = "";
+        console.log(mobile);
+        if ((/^\d{5}$|^\d{5}-\d{4}$/.test($location)) || ($select > 0)) {
+            URL += "/posts";
+            if (/^\d{5}$|^\d{5}-\d{4}$/.test($location)) {
+                URL += `/location/${$location}`;
+            };
+            if ($select > 0) {
+                URL += `/tag/${$tag.toLowerCase()}`;
+            };
+            // currently not a running feature
+            // if ($rating != "Choose Rating") {
+            //     URL += `/rating/${$rating.replace(/\s/g, '-').toLowerCase()}`;
+            // }
+
+            $(location).attr('href', URL);
+            // console.log(URL);
+        };
+
+    };
+
     // Retrieve list of users from search box
-    const renderSearch = (key) => {
-        if ($(".search-text").val() != "") {
-            console.log("axaj request");
+    const renderSearch = (key, mobile) => {
+        if ($(".search-text").val() != "" || $(`.search-text-${mobile}`).val() != "") {
+            
             $.get("/api/usersearch/" + key, data => {
-
-                $('.userNameList').html('')
-
-                console.log(data[0]);
+                if (mobile) {
+                    $(`.userNameList-${mobile}`).html('')
+                }
+                else {
+                    $('.userNameList').html('')
+                }
 
                 data.forEach((element, index) => {
-                    // console.log(element.name);
                     var li = $('<li>');
-                    $(li).addClass('username li-' + index)
+                    if (mobile) {
+                        $(li).addClass('username li-' + index)
+                        .appendTo($(`.userNameList-${mobile}`));
+                    }
+                    else {
+                        $(li).addClass('username li-' + index)
                         .appendTo($('.userNameList'));
+                    }
 
-                    var a = $("<a>").attr("href", "/postapp/" + element.UserName)
+                    var a = $("<a>").attr("href", `/user/${element.UserName}`)
                         .html(element.UserName);
-                    $(a).appendTo($(".li-" + index))  ;                  
+                    $(a).appendTo($(`.li-${index}`))  ;                  
                 })
             })
         }
         else if($(".search-text").val() === "") {
-            $('.userNameList').empty();
+            if (mobile) {
+                $(`.userNameList-${mobile}`).empty();
+            }
+            else {
+                $('.userNameList').empty();
+            }
         }
-    }
-
-    const userPosts = name => {
-        $.get("/postapp/" + name, data => {
-        })
-    }
-
-    // Render a users posts
-    const renderUserPosts = name => {
-        $.get("/api/authors/" + name, data => {
-            console.log(data);
-
-            var userView = $("<h5>")
-            $(userView).html(`${data.UserName}'s Posts`)
-                .appendTo(".user-posts");
-
-            $(".local-posts").hide();
-            $(".add-post").hide();
-            $(".user-posts").empty();
-
-            data.Posts.forEach(element => {
-                console.log(element)
-                console.log("body " + element.Body)
-                console.log("name " + data.UserName)
-                console.log("time posted " + element.createdAt)
-                console.log("tags" + element.Tags)
-
-                var userPosts = $(`
-                <div class="post">
-                    <div class="text-bubble">
-                        <div class="bubble z-depth-1">
-                            <p class="body-text">${element.Body}</p>
-                        </div>
-                        <div class="triangle-right"></div>
-                        <div class="icon">
-                            <div class="icon-picture" style="background-image: url(fashion-festival-graffiti-1447356.jpg);"></div>
-                            <span class="icon-name">${data.UserName}</span>
-                        </div>
-                        <div class="post-info">
-                            <p>Postal: ${element.Location}</p>
-                            <span id="tags">Topics: ${element.Tags}</span>
-                            <span id="time-stamp">${element.createdAt}</span>
-                        </div>
-                    </div>
-                </div>`)
-                $(userPosts).appendTo($(".user-posts"));
-            })
-            
-        })
-    }
+    };
 
     // EVENTS
+    // render realtime username search
     $('.search-text').on("keyup", e => {
         renderSearch(e.target.value);
+    })
+
+    $('.search-text-mobile').on("keyup", e => {
+        renderSearch(e.target.value, "mobile");
     })
 
     // clear dropdown when clicked away
@@ -88,12 +97,23 @@ $(document).ready(() => {
         if (!element.includes("username")) {
             $('.userNameList').empty();
         }
-    })
+    });
 
-    // click to retrieve users posts
-    $('body').on( "click", ".username", (e) => {
-        // renderUserPosts(e.currentTarget.innerHTML);
-        userPosts(e.currentTarget.innerHTML);
-        $('.userNameList').empty();
-      });
+    // SEARCH FILTERS
+    $(".filter-search").on("click", (e) => {
+        e.preventDefault();
+        performSearch("");
+        // checkLocationInput();
+    });
+
+    $(".filter-search-mobile").on("click", (e) => {
+        e.preventDefault();
+        performSearch("-mobile");
+    });
+
+    $(document).on("keyup", function(event) {
+        if (event.keyCode === 13) {
+            checkLocationInput();
+        }
+    });
 });
