@@ -12,14 +12,13 @@ body {
     margin-bottom: 5px;
     background-color: rgba(141, 18, 18, 0.1);
     border-radius: 5px;
-    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.233);
 }
 
 .text-bubble {
     display: inline-block;
     width: 82%;
     vertical-align: top;
-    background: azure;
 }
 
 .bubble {
@@ -40,7 +39,6 @@ body {
     border-top: 10px solid transparent;
     border-left: 15px solid rgb(104, 104, 104);
     border-bottom: 10px solid transparent;
-    background: rgb(255, 255, 255);
 }
 
 .icon {
@@ -59,11 +57,11 @@ body {
     border-radius: 50px;
     background-repeat: no-repeat;
     background-size: cover;
-    background: rgb(17, 17, 17);
+    background-image: url("../images/profilepic.png");
 }
 
 .post-info {
-    color: rgba(20, 19, 19, 0.5);
+    color: rgba(196, 196, 196, 0.829).5);
     margin-top: 10px;
 }
 
@@ -136,13 +134,13 @@ hr {
 /* label color */
 
 .input-field label {
-    color: #000;
+    color: rgb(201, 201, 201);
 }
 
 /* label focus color */
 
 .input-field input[type=text]:focus+label {
-    color: #000;
+    color: rgb(168, 168, 168);
 }
 
 /* label underline focus color */
@@ -169,7 +167,7 @@ hr {
 /* icon prefix focus color */
 
 .input-field .prefix.active {
-    color: #000;
+    color: rgb(202, 202, 202);
     background: rgb(255, 255, 255);
 }
 
@@ -220,7 +218,7 @@ hr {
 }
 
 #signup {
-    background: rgb(255, 255, 255);
+    color: white;
 }
 
 #signin {
@@ -237,6 +235,10 @@ hr {
     padding-bottom: 20px;
 }
 
-#signin {
+div p {
     color: white;
-}
+  }
+
+  .label {
+      color: white;
+  }
